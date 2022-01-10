@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="_fragments :: head(~{::title})">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>博客管理</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+  <link rel="stylesheet" href="../../static/css/me.css">
+</head>
+<body>
+
+<!--&lt;!&ndash;导航&ndash;&gt;-->
+<nav th:replace="_fragments :: menu(1)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small" >
+  <div class="ui container">
+    <form action="#" method="post" class="ui inverted secondary stackable menu">
+      <h2 class="ui teal header item">二级类别信息</h2>
+    </form>
+  </div>
+
+</nav>
+<div class="ui attached pointing menu">
+  <div class="ui container">
+    <div class="right menu">
+      <a href="@{/product/class}" class=" item">分类展示</a>
+      <a href="#" class="teal active item">列表</a>
+    </div>
+  </div>
+</div>
+
+<!--中间内容-->
+<div  class="m-container-small m-padded-tb-big">
+  <div class="ui container">
+
+    <div id="table-container">
+      <table th:fragment="blogList" class="ui compact teal table">
+        <thead>
+        <tr>
+          <th></th>
+          <th>二级类别</th>
+          <th>均价</th>
+          <th>最小价</th>
+          <th>最大价</th>
+          <th>中位价</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="secondInfo,iterStat : ${secondInfos}">
+
+          <td th:text=${iterStat.count}>1</td>
+          <td th:text="${secondInfo.secondClass}" >标题</td>
+
+          <td th:text="${secondInfo.avg}">类别</td>
+          <td th:text="${secondInfo.min}">价格</td>
+          <td th:text="${secondInfo.max}">销量</td>
+          <td th:text="${secondInfo.mid}">店铺</td>
+
+        </tr>
+        </tbody>
+
+      </table>
+
+      <div class="ui success message" th:unless="${#strings.isEmpty(param.message)}">
+        <i class="close icon"></i>
+        <div class="header">提示：</div>
+        <p th:text="${param.message}">恭喜，操作成功！</p>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<br>
+<br>
+<!--底部footer-->
+<footer th:replace="_fragments :: footer" class="ui inverted vertical segment m-padded-tb-massive">
+  <div class="ui center aligned container">
+
+    <p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright © 2020 - 2020 zlh Designed by zlh</p>
+  </div>
+
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+<!--/*/</th:block>/*/-->
+<script>
+
+  var pageOrSearch = true;
+  $('.menu.toggle').click(function () {
+    $('.m-item').toggleClass('m-mobile-hide');
+  });
+
+  $('.ui.dropdown').dropdown({
+    on : 'hover'
+  });
+
+  //消息提示关闭初始化
+  $('.message .close')
+          .on('click', function () {
+            $(this)
+                    .closest('.message')
+                    .transition('fade');
+          });
+
+  $('#clear-btn')
+          .on('click', function() {
+            $('.ui.type.dropdown')
+                    .dropdown('clear')
+            ;
+          })
+  ;
+
+  function page(obj) {
+    $("[name='page']").val($(obj).data("page"));
+    pageOrSearch = false;
+    loaddata();
+  }
+
+  $("#search-btn").click(function () {
+    $("[name='page']").val(1);
+    pageOrSearch = true;
+    loaddata();
+  });
+  /*
+  * 发送请求*/
+  function loaddata() {
+    $("#table-container").load("/product/search",{
+      title : $("[name='title']").val(),
+      page : $("[name='page']").val(),
+      pageOrSearch: pageOrSearch
+    });
+
+  }
+
+</script>
+</body>
+</html>

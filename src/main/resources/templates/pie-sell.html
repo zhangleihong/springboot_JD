@@ -1,0 +1,140 @@
+<!--
+    THIS EXAMPLE WAS DOWNLOADED FROM https://echarts.apache.org/examples/zh/editor.html?c=pie-doughnut&version=5.2.2&lang=js
+-->
+<!DOCTYPE html>
+<html style="height: 100%" xmlns:th="http://www.w3.org/1999/xhtml">
+    <head th:replace="_fragments :: head(~{::title})">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>博客管理</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+        <link rel="stylesheet" href="../static/css/me.css">
+    </head>
+    <body style="height: 100%; margin: 0">
+        <div style="text-align:center" class="ui container">
+            <form align="center" action="#" method="post" class="ui inverted secondary stackable menu">
+
+
+
+                <h2  class="ui teal header item">完美日记 至臻柔色丝绒唇釉 V01色 红梨天鹅绒 2.5g 生日礼物 口红唇釉 新年礼物-季度销量展示</h2>
+                <h3></h3>
+            </form>
+        </div>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5.2.2/dist/echarts.min.js"></script>
+        <!-- Uncomment this line if you want to dataTool extension
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5.2.2/dist/extension/dataTool.min.js"></script>
+        -->
+        <!-- Uncomment this line if you want to use gl extension
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-gl@2/dist/echarts-gl.min.js"></script>
+        -->
+        <!-- Uncomment this line if you want to echarts-stat extension
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-stat@latest/dist/ecStat.min.js"></script>
+        -->
+        <!-- Uncomment this line if you want to use map
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5.2.2/map/js/china.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5.2.2/map/js/world.js"></script>
+        -->
+        <!-- Uncomment these two lines if you want to use bmap extension
+        <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=<Your Key Here>"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@{{version}}/dist/extension/bmap.min.js"></script>
+        -->
+        <div id="main1" style="width: 900px;height:600px;display:inline-block;">
+            <script type="text/javascript">
+                var dom = document.getElementById("main1");
+                var myChart = echarts.init(dom);
+                var app = {};
+
+                var option;
+                var firstCount = '[[${sellCount.firstQuarter}]]';
+                var secondCount = '[[${sellCount.secondQuarter}]]';
+                var thirdCount = '[[${sellCount.thirdQuarter}]]';
+                var fourthCount = '[[${sellCount.forthQuarter}]]';
+
+
+
+                option = {
+                    xAxis: {
+                        type: 'category',
+                        data: ['一季度', '二季度', '三季度', '四季度']
+                    },
+                    yAxis: {
+                        type: 'value'
+                    },
+                    series: [
+                        {
+                            data: [firstCount, secondCount, thirdCount, fourthCount],
+                            type: 'line'
+                        }
+                    ]
+                };
+
+                if (option && typeof option === 'object') {
+                    myChart.setOption(option);
+                }
+
+            </script>
+        </div>
+        <div id="main2" style="width: 900px;height:600px;display:inline-block;">
+            <script type="text/javascript">
+                var dom = document.getElementById("main2");
+                var myChart = echarts.init(dom);
+                var app = {};
+
+                var option;
+                var firstCount = '[[${sellCount.firstQuarter}]]';
+                var secondCount = '[[${sellCount.secondQuarter}]]';
+                var thirdCount = '[[${sellCount.thirdQuarter}]]';
+                var fourthCount = '[[${sellCount.forthQuarter}]]';
+
+
+
+                option = {
+                    tooltip: {
+                        trigger: 'item'
+                    },
+                    legend: {
+                        top: '5%',
+                        left: 'center'
+                    },
+                    series: [
+                        {
+                            name: 'Access From',
+                            type: 'pie',
+                            radius: ['40%', '70%'],
+                            avoidLabelOverlap: false,
+                            label: {
+                                show: false,
+                                position: 'center'
+                            },
+                            emphasis: {
+                                label: {
+                                    show: true,
+                                    fontSize: '40',
+                                    fontWeight: 'bold'
+                                }
+                            },
+                            labelLine: {
+                                show: false
+                            },
+                            data: [
+                                { value: firstCount, name: '第一季度' },
+                                { value: secondCount, name: '第二季度' },
+                                { value: thirdCount, name: '第三季度' },
+                                { value: fourthCount, name: '第四季度' }
+                            ]
+                        }
+                    ]
+                };
+
+                if (option && typeof option === 'object') {
+                    myChart.setOption(option);
+                }
+
+            </script>
+        </div>
+
+
+
+    </body>
+</html>
+    

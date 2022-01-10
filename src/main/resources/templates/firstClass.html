@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="_fragments :: head(~{::title})">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>博客管理</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+  <link rel="stylesheet" href="../static/css/me.css">
+</head>
+<body>
+
+  <!--&lt;!&ndash;导航&ndash;&gt;-->
+  <nav th:replace="_fragments :: menu(1)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small" >
+    <div class="ui container">
+      <form action="#" method="post" class="ui inverted secondary stackable menu">
+        <h2 class="ui teal header item">一级类别显示</h2>
+      </form>
+    </div>
+
+  </nav>
+  <div class="ui attached pointing menu">
+    <div class="ui container">
+      <div class="right menu">
+        <a th:href="@{/product/showall/(page=1)}" class="item">列表</a>
+        <a th:href="@{/product/class/(page=1)}" class="teal active item">一级分类</a>
+      </div>
+    </div>
+  </div>
+
+  <!--中间内容-->
+  <div  class="m-container-small m-padded-tb-big">
+    <div class="ui container">
+
+      <div id="table-container">
+        <table th:fragment="classList" class="ui compact teal table">
+          <thead>
+          <tr>
+            <th></th>
+            <th>标题</th>
+            <th></th>
+            <th>操作</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="firstClass,iterStat : ${firstClasses}">
+
+            <td th:text=${iterStat.count}>1</td>
+
+            <td th:href="@{/product/api/(firstClass=${firstClass})}" th:text="${firstClass}" >
+              刻意练习清单</td>
+
+            <td></td>
+
+
+            <td>
+              <a th:href="@{/product/api/(firstClass=${firstClass})}" class="ui mini teal basic button">查看二级分类</a>
+
+              <a th:href="@{/product/shop/(firstClass=${firstClass})}" class="ui mini teal basic button">热点店铺</a>
+            </td>
+
+          </tr>
+          </tbody>
+          <tfoot>
+          <tr>
+            <th colspan="6">
+              <div class="ui mini pagination menu">
+                <a class=" item" th:href="@{/product/page/(page=${pages}-1)}">上一页</a>
+
+
+                <a class=" item" th:href="@{/product/page/(page=${pages}+1)}">下一页</a>
+                <a></a>
+                <p class=" item"><span th:text="${pages}">张雷红</span>/4</p>
+              </div>
+
+            </th>
+
+          </tr>
+          </tfoot>
+        </table>
+
+
+      </div>
+
+    </div>
+  </div>
+
+  <br>
+  <br>
+  <!--底部footer-->
+  <footer th:replace="_fragments :: footer" class="ui inverted vertical segment m-padded-tb-massive">
+    <div class="ui center aligned container">
+
+
+      <p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright © 2020 - 2020 zlh Designed by zlh</p>
+    </div>
+
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+  <!--/*/</th:block>/*/-->
+  <script>
+
+    var pageOrSearch = true;
+    $('.menu.toggle').click(function () {
+      $('.m-item').toggleClass('m-mobile-hide');
+    });
+
+    $('.ui.dropdown').dropdown({
+      on : 'hover'
+    });
+
+
+
+    // function page(obj) {
+    //   $("[name='page']").val($(obj).data("page"));
+    //   pageOrSearch = false;
+    //   loaddata();
+    // }
+    //
+    // $("#search-btn").click(function () {
+    //   $("[name='page']").val(1);
+    //   pageOrSearch = true;
+    //   loaddata();
+    // });
+    // /*
+    // * 发送请求*/
+    // function loaddata() {
+    //   $("#table-container").load("/product/class/search",{
+    //     page : $("[name='page']").val(),
+    //     pageOrSearch: pageOrSearch
+    //   });
+    //
+    // }
+
+
+  </script>
+</body>
+</html>

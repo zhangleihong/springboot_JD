@@ -1,0 +1,3 @@
+uri:mongodb://localhost.27017/nosql
+prop.upload-folder=D:\期末考试资料\研一\springboot_init_new\src\main\resources\static\images
+spring.resources.static-locations=classpath:/META-INF/resources/,file:${prop.upload-folder}
